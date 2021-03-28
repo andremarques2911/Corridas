@@ -37,7 +37,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         this.eventoService.save(EventoEntity.builder().nome("Evento 2").dataEvento(LocalDate.of(2019, 3, 24)).distancia(200).tempo(LocalTime.of(1, 30)).build());
         this.eventoService.save(EventoEntity.builder().nome("Evento 3").dataEvento(LocalDate.of(2020, 3, 24)).distancia(200).tempo(LocalTime.of(1, 0)).build());
         this.eventoService.save(EventoEntity.builder().nome("Evento 4").dataEvento(LocalDate.of(2021, 3, 24)).distancia(200).tempo(LocalTime.of(0, 30)).build());
-        this.eventoService.save(EventoEntity.builder().nome("Evento 5").dataEvento(LocalDate.of(2021, 3, 25)).distancia(200).tempo(LocalTime.of(2, 00)).build());
+        this.eventoService.save(EventoEntity.builder().nome("Evento 5").dataEvento(LocalDate.of(2021, 3, 25)).distancia(200).tempo(LocalTime.of(1, 10)).build());
+        this.eventoService.save(EventoEntity.builder().nome("Evento 6").dataEvento(LocalDate.of(2021, 3, 26)).distancia(200).tempo(LocalTime.of(0, 30)).build());
+        this.eventoService.save(EventoEntity.builder().nome("Evento 7").dataEvento(LocalDate.of(2021, 3, 27)).distancia(200).tempo(LocalTime.of(0, 25)).build());
 
         log.info("Terminou de popular");
     }

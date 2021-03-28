@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bcopstein.CtrlCorredorV1.dto.CorredorDTO;
 import com.bcopstein.CtrlCorredorV1.dto.EstatisticasDTO;
+import com.bcopstein.CtrlCorredorV1.dto.PerformanceDTO;
 import com.bcopstein.CtrlCorredorV1.service.CorredorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,12 @@ public class CorredorController {
   @CrossOrigin(origins = "*")
   public EstatisticasDTO estatisticas(@RequestParam final double distancia) {
     return this.corredorService.estatisticas(distancia);
+  }
+
+  @GetMapping("/aumentoPerformance")
+  @CrossOrigin(origins = "*")
+  public PerformanceDTO aumentoPerformance(@RequestParam final double distancia, @RequestParam final int ano){
+    return this.corredorService.aumentoPerformance(distancia, ano);
   }
 
 }
