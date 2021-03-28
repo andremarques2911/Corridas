@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
@@ -13,9 +15,7 @@ import java.time.LocalTime;
 public class EventoDTO {
   private Long id;
   private String nome;
-  private Integer dia;
-  private Integer mes;
-  private Integer ano;
+  private LocalDate dataEvento;
   private double distancia;
   private LocalTime tempo;
 }

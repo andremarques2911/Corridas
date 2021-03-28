@@ -35,4 +35,10 @@ public class EventoController {
     return this.eventoService.cadastraEvento(evento);
   }
 
+  @GetMapping("/filtra")
+  @CrossOrigin(origins = "*")
+  public List<EventoDTO> findByDistanciaAndDataEvento(@RequestBody final EventoDTO evento) {
+    return this.eventoService.findByDistanciaAndDataEvento(evento.getDistancia(), evento.getDataEvento().getYear());
+  }
+
 }

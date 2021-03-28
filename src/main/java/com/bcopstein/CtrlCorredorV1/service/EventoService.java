@@ -7,6 +7,7 @@ import com.bcopstein.CtrlCorredorV1.dto.EventoDTO;
 import com.bcopstein.CtrlCorredorV1.entity.EventoEntity;
 import com.bcopstein.CtrlCorredorV1.repository.EventoRepository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,13 +31,20 @@ public class EventoService extends AbstractService<EventoEntity, EventoRepositor
       .collect(Collectors.toList());
   }
 
+  public List<EventoDTO> findByDistanciaAndDataEvento(double distancia, int ano) {
+    List<EventoEntity> eventos = this.repository.findByDistancia(distancia, Sort.by(Sort.Direction.DESC, "dataEvento"));
+    eventos = eventos.stream().filter(e -> e.getDataEvento().getYear() == ano).collect(Collectors.toList());
+    return eventos
+      .stream()
+      .map(evento -> this.montaEventoDTO(evento))
+      .collect(Collectors.toList());
+  }
+
   private EventoDTO montaEventoDTO(EventoEntity entity) {
     return EventoDTO.builder()
       .id(entity.getId())
       .nome(entity.getNome())
-      .dia(entity.getDia())
-      .mes(entity.getMes())
-      .ano(entity.getAno())
+      .dataEvento(entity.getDataEvento())
       .distancia(entity.getDistancia())
       .tempo(entity.getTempo())
       .build();
@@ -46,9 +54,7 @@ public class EventoService extends AbstractService<EventoEntity, EventoRepositor
     return EventoEntity.builder()
       .id(dto.getId())
       .nome(dto.getNome())
-      .dia(dto.getDia())
-      .mes(dto.getMes())
-      .ano(dto.getAno())
+      .dataEvento(dto.getDataEvento())
       .distancia(dto.getDistancia())
       .tempo(dto.getTempo())
       .build();

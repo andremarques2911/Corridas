@@ -1,6 +1,6 @@
 package com.bcopstein.CtrlCorredorV1.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,29 +23,22 @@ import lombok.NoArgsConstructor;
 @Table( name = "corredores")
 public class CorredorEntity extends AbstractEntity {
 
+  private static final long serialVersionUID = 1L;
+
   @Id
   @SequenceGenerator(allocationSize = 1, name = "id_corredor_seq", sequenceName = "id_corredor_seq")
   @GeneratedValue(generator = "id_corredor_seq", strategy = GenerationType.SEQUENCE)
   @Column(name = "id_corredor")
   private Long id;
 
-  @Column
+  @Column( unique = true )
   private String cpf;
 
   @Column
   private String nome;
 
-//    @Column( name = "dt_nascimento" )
-//    private Date dataNascimento;
-
-  @Column
-  private Integer dia;
-
-  @Column
-  private Integer mes;
-
-  @Column
-  private Integer ano;
+   @Column( name = "dt_nascimento" )
+   private LocalDate dataNascimento;
 
   @Column
   private String genero;

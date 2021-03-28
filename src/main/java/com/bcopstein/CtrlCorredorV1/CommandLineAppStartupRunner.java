@@ -1,5 +1,6 @@
 package com.bcopstein.CtrlCorredorV1;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import com.bcopstein.CtrlCorredorV1.entity.CorredorEntity;
@@ -31,15 +32,12 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         log.info("Começou a popular");
 
         CorredorEntity corredor1 = this.corredorService.save(CorredorEntity.builder()
-            .cpf("9999999999").nome("Antares").dia(20).mes(10).ano(1980).genero("Masculino").build());
-        this.eventoService.save(EventoEntity.builder()
-            .nome("Evento 1").dia(24).mes(3).ano(2018).distancia(200).tempo(LocalTime.of(2, 00)).build());
-        this.eventoService.save(EventoEntity.builder()
-          .nome("Evento 2").dia(24).mes(3).ano(2019).distancia(200).tempo(LocalTime.of(1, 30)).build());
-        this.eventoService.save(EventoEntity.builder()
-          .nome("Evento 3").dia(24).mes(3).ano(2020).distancia(200).tempo(LocalTime.of(1, 0)).build());
-        this.eventoService.save(EventoEntity.builder()
-          .nome("Evento 4").dia(24).mes(3).ano(2021).distancia(200).tempo(LocalTime.of(0, 30)).build());
+            .cpf("9999999999").nome("Antares").dataNascimento(LocalDate.of(1980, 10, 20)).genero("Masculino").build());
+        this.eventoService.save(EventoEntity.builder().nome("Evento 1").dataEvento(LocalDate.of(2018, 3, 24)).distancia(200).tempo(LocalTime.of(2, 00)).build());
+        this.eventoService.save(EventoEntity.builder().nome("Evento 2").dataEvento(LocalDate.of(2019, 3, 24)).distancia(200).tempo(LocalTime.of(1, 30)).build());
+        this.eventoService.save(EventoEntity.builder().nome("Evento 3").dataEvento(LocalDate.of(2020, 3, 24)).distancia(200).tempo(LocalTime.of(1, 0)).build());
+        this.eventoService.save(EventoEntity.builder().nome("Evento 4").dataEvento(LocalDate.of(2021, 3, 24)).distancia(200).tempo(LocalTime.of(0, 30)).build());
+        this.eventoService.save(EventoEntity.builder().nome("Evento 5").dataEvento(LocalDate.of(2021, 3, 25)).distancia(200).tempo(LocalTime.of(2, 00)).build());
 
         log.info("Terminou de popular");
     }

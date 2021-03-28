@@ -11,7 +11,6 @@ import com.bcopstein.CtrlCorredorV1.dto.CorredorDTO;
 import com.bcopstein.CtrlCorredorV1.dto.EstatisticasDTO;
 import com.bcopstein.CtrlCorredorV1.dto.EventoDTO;
 import com.bcopstein.CtrlCorredorV1.entity.CorredorEntity;
-import com.bcopstein.CtrlCorredorV1.entity.EventoEntity;
 import com.bcopstein.CtrlCorredorV1.repository.CorredorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,9 +80,7 @@ public class CorredorService extends AbstractService<CorredorEntity, CorredorRep
     return CorredorDTO.builder()
       .cpf(entity.getCpf())
       .nome(entity.getNome())
-      .dia(entity.getDia())
-      .mes(entity.getMes())
-      .ano(entity.getAno())
+      .dataNascimento(entity.getDataNascimento())
       .genero(entity.getGenero())
       .build();
   }
@@ -92,9 +89,7 @@ public class CorredorService extends AbstractService<CorredorEntity, CorredorRep
     return CorredorEntity.builder()
       .cpf(dto.getCpf())
       .nome(dto.getNome())
-      .dia(dto.getDia())
-      .mes(dto.getMes())
-      .ano(dto.getAno())
+      .dataNascimento(dto.getDataNascimento())
       .genero(dto.getGenero())
       .build();
   }
