@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,15 +31,16 @@ public class EventoController {
     return this.eventoService.listarTodos();
   }
 
+  @GetMapping("/all")
+  @CrossOrigin(origins = "*")
+  public List<EventoEntity> searchByDistancia(@RequestParam double distancia) {
+    return this.eventoService.findByDistancia(distancia);
+  }
+
   @PostMapping("/")
   @CrossOrigin(origins = "*")
-  public boolean informaEvento(@RequestBody final EventoEntity evento) {
-    // this.jdbcTemplate.update(
-    //   "INSERT INTO eventos(id,nome,dia,mes,ano,distancia,horas,minutos,segundos) VALUES (?,?,?,?,?,?,?,?,?)",
-    //   evento.getId(), evento.getNome(), evento.getDia(), evento.getMes(), evento.getAno(),
-    //   evento.getDistancia(), evento.getHoras(), evento.getMinutos(), evento.getSegundos());
-
-    return true;
+  public boolean informaEvento(@RequestBody final EventoDTO evento) {
+    return this.eventoService.cadastraEvento(evento);
   }
 
 }

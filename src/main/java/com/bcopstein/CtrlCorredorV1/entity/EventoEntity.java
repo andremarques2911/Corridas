@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.time.LocalTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,21 +43,14 @@ public class EventoEntity extends AbstractEntity {
 
   // Distancia percorrida
   @Column( name = "distancia", nullable = false )
-  private Integer distancia; // metros
-  
-  // Tempo que o corredor levou para percorrer a distancia
-  @Column( name = "horas" )
-  private Integer horas;
+  private double distancia; // metros
 
-  @Column( name = "minutos" )
-  private Integer minutos;
+  @Column( name = "tempo", nullable = false )
+  private LocalTime tempo;
 
-  @Column( name = "segundos" )
-  private Integer segundos;
-
-  @Override
-  public String toString() {
-    return "Evento [ano=" + ano + ", dia=" + dia + ", distancia=" + distancia + ", horas=" + horas + ", id=" + id
-      + ", mes=" + mes + ", minutos=" + minutos + ", nome=" + nome + ", segundos=" + segundos + "]";
-  }
+  // @Override
+  // public String toString() {
+  //   return "Evento [ano=" + ano + ", dia=" + dia + ", distancia=" + distancia + ", horas=" + horas + ", id=" + id
+  //     + ", mes=" + mes + ", minutos=" + minutos + ", nome=" + nome + ", segundos=" + segundos + "]";
+  // }
 }

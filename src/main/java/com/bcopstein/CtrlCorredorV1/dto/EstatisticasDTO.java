@@ -10,12 +10,9 @@ import java.time.LocalTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventoDTO {
-  private Long id;
-  private String nome;
-  private Integer dia;
-  private Integer mes;
-  private Integer ano;
-  private double distancia;
-  private LocalTime tempo;
+public class EstatisticasDTO {
+  private LocalTime media;
+  private double mediana;
+  private double desvioPadrao;
+  private int qtdCorridas;
 }

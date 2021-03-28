@@ -3,6 +3,7 @@ package com.bcopstein.CtrlCorredorV1.controller;
 import java.util.List;
 
 import com.bcopstein.CtrlCorredorV1.dto.CorredorDTO;
+import com.bcopstein.CtrlCorredorV1.dto.EstatisticasDTO;
 import com.bcopstein.CtrlCorredorV1.service.CorredorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,4 +37,9 @@ public class CorredorController {
     return this.corredorService.cadastraCorredor(corredor);
   }
 
+  @GetMapping("/estatisticas")
+  @CrossOrigin(origins = "*")
+  public EstatisticasDTO estatisticas(@RequestParam final double distancia) {
+    return this.corredorService.estatisticas(distancia);
+  }
 }

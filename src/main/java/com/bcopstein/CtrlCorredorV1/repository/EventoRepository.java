@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EventoRepository extends CrudRepository<EventoEntity, Long> {
-    
+
   List<EventoEntity> findAll();
+
+  List<EventoEntity> findByDistancia(double distancia);
 
 }

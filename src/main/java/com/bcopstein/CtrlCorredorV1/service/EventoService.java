@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventoService extends AbstractService<EventoEntity, EventoRepository> {
 
-  public boolean cadastraCorredor(EventoDTO dto) {
+  public boolean cadastraEvento(EventoDTO dto) {
     return this.repository.save(this.montaEventoEntity(dto)) != null;
   }
 
@@ -26,9 +26,7 @@ public class EventoService extends AbstractService<EventoEntity, EventoRepositor
         .mes(it.getMes())
         .ano(it.getAno())
         .distancia(it.getDistancia())
-        .horas(it.getHoras())
-        .minutos(it.getMinutos())
-        .segundos(it.getSegundos())
+        .tempo(it.getTempo())
         .build())
       .collect(Collectors.toList());
   }
@@ -41,10 +39,11 @@ public class EventoService extends AbstractService<EventoEntity, EventoRepositor
       .mes(dto.getMes())
       .ano(dto.getAno())
       .distancia(dto.getDistancia())
-      .horas(dto.getHoras())
-      .minutos(dto.getMinutos())
-      .segundos(dto.getSegundos())
+      .tempo(dto.getTempo())
       .build();
   }
 
+  public List<EventoEntity> findByDistancia(double distancia) {
+    return this.repository.findByDistancia(distancia);
+  }
 }
