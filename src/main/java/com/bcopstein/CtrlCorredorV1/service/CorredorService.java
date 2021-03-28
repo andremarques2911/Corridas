@@ -40,9 +40,15 @@ public class CorredorService extends AbstractService<CorredorEntity, CorredorRep
     List<LocalTime> tempos = new ArrayList<>();
     for(EventoDTO evento : lista) tempos.add(evento.getTempo());
 
+    LocalTime media = this.calculaMedia(tempos);
+    LocalTime mediana = this.calculaMediana(tempos);
+    LocalTime desvioPadrao = this.calculaDesvioPadrao(tempos, media);
+
     EstatisticasDTO estatisticas = EstatisticasDTO.builder()
-      .media(this.calculaMedia(tempos))
-      .mediana(this.calculaMediana(tempos))
+      .media(media)
+      .mediana(mediana)
+      .desvioPadrao(desvioPadrao)
+      .quantidadeCorridas(tempos.size())
       .build();
     return estatisticas;
   }
@@ -63,6 +69,12 @@ public class CorredorService extends AbstractService<CorredorEntity, CorredorRep
       int m = tempos.size() / 2;
       return this.calculaMedia(Arrays.asList(tempos.get(m - 1), tempos.get(m)));
     }
+  }
+
+  private LocalTime calculaDesvioPadrao(List<LocalTime> tempos, LocalTime media) {
+    double standardDeviation = 0.0;
+    for(LocalTime tempo : tempos) standardDeviation += Math.pow(tempo.toSecondOfDay() - media.toSecondOfDay(), 2);
+    return LocalTime.ofSecondOfDay((long) Math.sqrt(standardDeviation / tempos.size()));
   }
 
   private CorredorDTO montaCorredorDTO(CorredorEntity entity) {

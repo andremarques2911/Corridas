@@ -13,6 +13,6 @@ import java.time.LocalTime;
 public class EstatisticasDTO {
   private LocalTime media;
   private LocalTime mediana;
-  private double desvioPadrao;
-  private int qtdCorridas;
+  private LocalTime desvioPadrao;
+  private int quantidadeCorridas;
 }
