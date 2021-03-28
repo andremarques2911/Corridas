@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PerformanceDTO {
-  private String nomeProva1;
-  private String nomeProva2;
+  private String nomeEvento1;
+  private String nomeEvento2;
 }

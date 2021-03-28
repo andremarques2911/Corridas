@@ -39,7 +39,7 @@ public class EventoEntity extends AbstractEntity {
   private LocalDate dataEvento;
 
   @Column( nullable = false )
-  private double distancia; // metros
+  private double distancia;
 
   @Column( nullable = false )
   private LocalTime tempo;

@@ -31,7 +31,7 @@ public class EventoService extends AbstractService<EventoEntity, EventoRepositor
       .collect(Collectors.toList());
   }
 
-  public List<EventoDTO> findByDistanciaAndDataEvento(double distancia, int ano) {
+  public List<EventoDTO> buscaPorDistanciaEDataEvento(double distancia, int ano) {
     List<EventoEntity> eventos = this.repository.findByDistancia(distancia, Sort.by(Sort.Direction.ASC, "dataEvento"));
     eventos = eventos.stream().filter(e -> e.getDataEvento().getYear() == ano).collect(Collectors.toList());
     return eventos

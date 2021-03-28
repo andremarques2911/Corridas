@@ -55,10 +55,10 @@ public class CorredorService extends AbstractService<CorredorEntity, CorredorRep
   }
 
   public PerformanceDTO aumentoPerformance(double distancia, int ano) {
-    List<EventoDTO> eventos = this.eventoService.findByDistanciaAndDataEvento(distancia, ano);
+    List<EventoDTO> eventos = this.eventoService.buscaPorDistanciaEDataEvento(distancia, ano);
     LocalTime melhorPerformance = LocalTime.of(0, 0, 0);
-    String nomeMelhorProva1 = null;
-    String nomeMelhorProva2 = null;
+    String nomeMelhorEvento1 = null;
+    String nomeMelhorEvento2 = null;
 
     for(int i=0; i<eventos.size()-1; i++){
       EventoDTO evento1 = eventos.get(i);
@@ -67,15 +67,15 @@ public class CorredorService extends AbstractService<CorredorEntity, CorredorRep
         LocalTime performanceAtual = evento1.getTempo().minusSeconds(evento2.getTempo().toSecondOfDay());
         if (performanceAtual.isAfter(melhorPerformance)) {
           melhorPerformance = performanceAtual;
-          nomeMelhorProva1 = evento1.getNome();
-          nomeMelhorProva2 = evento2.getNome();
+          nomeMelhorEvento1 = evento1.getNome();
+          nomeMelhorEvento2 = evento2.getNome();
         }
       }
     }
 
     return PerformanceDTO.builder()
-      .nomeProva1(nomeMelhorProva1)
-      .nomeProva2(nomeMelhorProva2)
+      .nomeEvento1(nomeMelhorEvento1)
+      .nomeEvento2(nomeMelhorEvento2)
       .build();
   }
 
