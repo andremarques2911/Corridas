@@ -1,6 +1,9 @@
 package com.bcopstein.CtrlCorredorV1;
 
+import java.time.LocalTime;
+
 import com.bcopstein.CtrlCorredorV1.entity.CorredorEntity;
+import com.bcopstein.CtrlCorredorV1.entity.EventoEntity;
 import com.bcopstein.CtrlCorredorV1.service.CorredorService;
 import com.bcopstein.CtrlCorredorV1.service.EventoService;
 
@@ -29,8 +32,14 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
         CorredorEntity corredor1 = this.corredorService.save(CorredorEntity.builder()
             .cpf("9999999999").nome("Antares").dia(20).mes(10).ano(1980).genero("Masculino").build());
-        // EventoEntity evento1 = this.eventoService.save(EventoEntity.builder()
-        //     .nome("Evento 1").dia(24).mes(3).ano(2021).distancia(200).horas(2).minutos(10).segundos(55).build());
+        this.eventoService.save(EventoEntity.builder()
+            .nome("Evento 1").dia(24).mes(3).ano(2018).distancia(200).tempo(LocalTime.of(2, 00)).build());
+        this.eventoService.save(EventoEntity.builder()
+          .nome("Evento 2").dia(24).mes(3).ano(2019).distancia(200).tempo(LocalTime.of(1, 30)).build());
+        this.eventoService.save(EventoEntity.builder()
+          .nome("Evento 3").dia(24).mes(3).ano(2020).distancia(200).tempo(LocalTime.of(1, 0)).build());
+        this.eventoService.save(EventoEntity.builder()
+          .nome("Evento 4").dia(24).mes(3).ano(2021).distancia(200).tempo(LocalTime.of(0, 30)).build());
 
         log.info("Terminou de popular");
     }

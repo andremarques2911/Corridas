@@ -42,4 +42,5 @@ public class CorredorController {
   public EstatisticasDTO estatisticas(@RequestParam final double distancia) {
     return this.corredorService.estatisticas(distancia);
   }
+
 }

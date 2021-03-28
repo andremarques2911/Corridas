@@ -19,16 +19,27 @@ public class EventoService extends AbstractService<EventoEntity, EventoRepositor
   public List<EventoDTO> listarTodos() {
     return this.listAll()
       .stream()
-      .map(it -> EventoDTO.builder()
-        .id(it.getId())
-        .nome(it.getNome())
-        .dia(it.getDia())
-        .mes(it.getMes())
-        .ano(it.getAno())
-        .distancia(it.getDistancia())
-        .tempo(it.getTempo())
-        .build())
+      .map(evento -> this.montaEventoDTO(evento))
       .collect(Collectors.toList());
+  }
+
+  public List<EventoDTO> findByDistancia(double distancia) {
+    return this.repository.findByDistancia(distancia)
+      .stream()
+      .map(evento -> this.montaEventoDTO(evento))
+      .collect(Collectors.toList());
+  }
+
+  private EventoDTO montaEventoDTO(EventoEntity entity) {
+    return EventoDTO.builder()
+      .id(entity.getId())
+      .nome(entity.getNome())
+      .dia(entity.getDia())
+      .mes(entity.getMes())
+      .ano(entity.getAno())
+      .distancia(entity.getDistancia())
+      .tempo(entity.getTempo())
+      .build();
   }
 
   private EventoEntity montaEventoEntity(EventoDTO dto) {
@@ -41,9 +52,5 @@ public class EventoService extends AbstractService<EventoEntity, EventoRepositor
       .distancia(dto.getDistancia())
       .tempo(dto.getTempo())
       .build();
-  }
-
-  public List<EventoEntity> findByDistancia(double distancia) {
-    return this.repository.findByDistancia(distancia);
   }
 }

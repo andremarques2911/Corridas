@@ -12,7 +12,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class EstatisticasDTO {
   private LocalTime media;
-  private double mediana;
+  private LocalTime mediana;
   private double desvioPadrao;
   private int qtdCorridas;
 }

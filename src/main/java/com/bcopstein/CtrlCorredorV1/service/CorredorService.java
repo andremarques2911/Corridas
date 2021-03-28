@@ -1,19 +1,20 @@
 package com.bcopstein.CtrlCorredorV1.service;
 
-import java.util.List;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bcopstein.CtrlCorredorV1.dto.CorredorDTO;
 import com.bcopstein.CtrlCorredorV1.dto.EstatisticasDTO;
+import com.bcopstein.CtrlCorredorV1.dto.EventoDTO;
 import com.bcopstein.CtrlCorredorV1.entity.CorredorEntity;
 import com.bcopstein.CtrlCorredorV1.entity.EventoEntity;
-import com.bcopstein.CtrlCorredorV1.service.EventoService;
 import com.bcopstein.CtrlCorredorV1.repository.CorredorRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import java.time.LocalTime;
-
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,37 +30,50 @@ public class CorredorService extends AbstractService<CorredorEntity, CorredorRep
   public List<CorredorDTO> listarTodos() {
     return this.listAll()
       .stream()
-      .map(it -> CorredorDTO.builder()
-        .cpf(it.getCpf())
-        .nome(it.getNome())
-        .dia(it.getDia())
-        .mes(it.getMes())
-        .ano(it.getAno())
-        .genero(it.getGenero())
-        .build())
+      .map(corredor -> this.montaCorredorDTO(corredor))
       .collect(Collectors.toList());
   }
 
   public EstatisticasDTO estatisticas(double distancia) {
-    List<EventoEntity> lista = this.eventoService.findByDistancia(distancia);
-    double somaSegundos = 0;
-    // for(EventoEntity evento : lista) {
-    //   double horaSegundos = Double.valueOf(evento.getTempo().getHour());
-    //   double minutosSegundos = Double.valueOf(evento.getTempo().getMinute());
-    //   double segundos = Double.valueOf(evento.getTempo().getSecond());
-    //   somaSegundos += horaSegundos + minutosSegundos + segundos;
-    // };
+    List<EventoDTO> lista = this.eventoService.findByDistancia(distancia);
+
     List<LocalTime> tempos = new ArrayList<>();
-    for(EventoEntity evento : lista) {
-      tempos.add(evento.getTempo());
-    }
-    LocalTime media = LocalTime.ofSecondOfDay((long) tempos.stream()
-        .mapToInt(LocalTime::toSecondOfDay)
-        .average()
-        .getAsDouble());
-    // double media = somaSegundos / lista.size();
-    EstatisticasDTO estatisticas = EstatisticasDTO.builder().media(media).build();
+    for(EventoDTO evento : lista) tempos.add(evento.getTempo());
+
+    EstatisticasDTO estatisticas = EstatisticasDTO.builder()
+      .media(this.calculaMedia(tempos))
+      .mediana(this.calculaMediana(tempos))
+      .build();
     return estatisticas;
+  }
+
+  private LocalTime calculaMedia(List<LocalTime> tempos) {
+    return LocalTime.ofSecondOfDay((long) tempos.stream()
+      .mapToInt(LocalTime::toSecondOfDay)
+      .average()
+      .getAsDouble());
+  }
+
+  private LocalTime calculaMediana(List<LocalTime> tempos) {
+    Collections.sort(tempos);
+    int tipo = tempos.size() % 2;
+    if (tipo == 1) {
+      return tempos.get(((tempos.size() + 1) / 2) - 1);
+    } else {
+      int m = tempos.size() / 2;
+      return this.calculaMedia(Arrays.asList(tempos.get(m - 1), tempos.get(m)));
+    }
+  }
+
+  private CorredorDTO montaCorredorDTO(CorredorEntity entity) {
+    return CorredorDTO.builder()
+      .cpf(entity.getCpf())
+      .nome(entity.getNome())
+      .dia(entity.getDia())
+      .mes(entity.getMes())
+      .ano(entity.getAno())
+      .genero(entity.getGenero())
+      .build();
   }
 
   private CorredorEntity montaCorredorEntity(CorredorDTO dto) {
