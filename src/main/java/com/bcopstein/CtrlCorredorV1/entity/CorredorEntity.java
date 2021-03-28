@@ -31,16 +31,16 @@ public class CorredorEntity extends AbstractEntity {
   @Column(name = "id_corredor")
   private Long id;
 
-  @Column( unique = true )
+  @Column( nullable = false, unique = true )
   private String cpf;
 
-  @Column
+  @Column( nullable = false )
   private String nome;
 
-   @Column( name = "dt_nascimento" )
+   @Column( name = "dt_nascimento", nullable = false )
    private LocalDate dataNascimento;
 
-  @Column
+  @Column( nullable = false )
   private String genero;
 
 }

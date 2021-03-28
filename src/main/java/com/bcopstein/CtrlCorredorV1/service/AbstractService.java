@@ -30,14 +30,14 @@ public abstract class AbstractService <
   }
 
   @Transactional(rollbackFor = Exception.class)
-  public boolean deleteById(Long id){
+  public boolean deleteById(Long id) {
     Entity entity = repository.findById(id).get();
     boolean exists = entity == null ? false : true;
     repository.deleteById(id);
     return exists;
   }
 
-  public Entity findById(Long id){
+  public Entity findById(Long id) {
     return repository.findById(id).get();
   }
 }

@@ -35,6 +35,7 @@ public class CorredorService extends AbstractService<CorredorEntity, CorredorRep
   }
 
   public EstatisticasDTO estatisticas(double distancia) {
+
     List<EventoDTO> lista = this.eventoService.findByDistancia(distancia);
 
     List<LocalTime> tempos = new ArrayList<>();

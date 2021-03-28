@@ -31,12 +31,12 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         log.info("Começou a popular");
 
-        CorredorEntity corredor1 = this.corredorService.save(CorredorEntity.builder()
+      this.corredorService.save(CorredorEntity.builder()
             .cpf("9999999999").nome("Antares").dataNascimento(LocalDate.of(1980, 10, 20)).genero("Masculino").build());
         this.eventoService.save(EventoEntity.builder().nome("Evento 1").dataEvento(LocalDate.of(2018, 3, 24)).distancia(200).tempo(LocalTime.of(2, 00)).build());
         this.eventoService.save(EventoEntity.builder().nome("Evento 2").dataEvento(LocalDate.of(2019, 3, 24)).distancia(200).tempo(LocalTime.of(1, 30)).build());
         this.eventoService.save(EventoEntity.builder().nome("Evento 3").dataEvento(LocalDate.of(2020, 3, 24)).distancia(200).tempo(LocalTime.of(1, 0)).build());
-        this.eventoService.save(EventoEntity.builder().nome("Evento 4").dataEvento(LocalDate.of(2021, 3, 24)).distancia(200).tempo(LocalTime.of(0, 30)).build());
+        this.eventoService.save(EventoEntity.builder().nome("Evento 4").dataEvento(LocalDate.of(2021, 3, 24)).distancia(200).tempo(LocalTime.of(1, 00)).build());
         this.eventoService.save(EventoEntity.builder().nome("Evento 5").dataEvento(LocalDate.of(2021, 3, 25)).distancia(200).tempo(LocalTime.of(1, 10)).build());
         this.eventoService.save(EventoEntity.builder().nome("Evento 6").dataEvento(LocalDate.of(2021, 3, 26)).distancia(200).tempo(LocalTime.of(0, 30)).build());
         this.eventoService.save(EventoEntity.builder().nome("Evento 7").dataEvento(LocalDate.of(2021, 3, 27)).distancia(200).tempo(LocalTime.of(0, 25)).build());

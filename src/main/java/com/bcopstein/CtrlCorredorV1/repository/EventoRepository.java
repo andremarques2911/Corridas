@@ -1,7 +1,6 @@
 package com.bcopstein.CtrlCorredorV1.repository;
 
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.bcopstein.CtrlCorredorV1.entity.EventoEntity;
