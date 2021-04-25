@@ -1,4 +1,4 @@
-package com.bcopstein.CtrlCorredorV1;
+package com.bcopstein.ctrlcorredor_v7_CLEAN;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
