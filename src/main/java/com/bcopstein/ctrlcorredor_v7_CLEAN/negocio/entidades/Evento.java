@@ -44,7 +44,6 @@ public class Evento {
   @Embedded
   private CustomTime horaEvento;
 
-  // @ManyToOne(fetch = FetchType.LAZY)
   @JsonBackReference
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "id_corredor",  nullable = false)

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.bcopstein.ctrlcorredor_v7_CLEAN.negocio.repositorios.IEventoRepository;
 import com.bcopstein.ctrlcorredor_v7_CLEAN.negocio.entidades.Evento;
 
+@Repository
 public interface IEventoRepositoryCustom extends CrudRepository<Evento, Long> {
 
   List<Evento> findAll();
